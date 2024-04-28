@@ -180,9 +180,10 @@ def index():
 @app.route("/scan_list")
 @login_required
 def scan_list(): 
-  PREVIOUS_SCANS_LIST_LIMIT = 5
-  previous_scans_list = Scan.query.order_by(Scan.date_created.desc()).limit(PREVIOUS_SCANS_LIST_LIMIT).all()
+  PREVIOUS_SCANS_LIST_LIMIT = 15
+  #only get the last 15 scans for the logged in user
 
+  previous_scans_list = Scan.query.filter_by(user_created_by=current_user.username).order_by(Scan.date_created.desc()).limit(PREVIOUS_SCANS_LIST_LIMIT).all()
   return render_template("scan_list.html", previous_scans=previous_scans_list)
 
 @app.route("/begin_scan", methods=["POST"])
@@ -225,13 +226,10 @@ def begin_scan():
         # Create new excel_chart records for the corresponding excel_file
         create_excel_chart_record(chart_data[file.filename], excel_file_id)
         
-        # Perform plagiarism checks on files in scan list
-        perform_checks(new_scan.id, db, ExcelFile, ExcelChart, TemplateFile)
-
       except Exception as e:
         return f"Error  the file: {str(e)}"
-
-
+  # Perform plagiarism checks on files in scan list
+  perform_checks(new_scan.id, db, ExcelFile, ExcelChart, TemplateFile)
 
   return redirect(url_for(".scan_results", scan_id=new_scan.id))
 

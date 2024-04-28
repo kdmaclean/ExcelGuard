@@ -5,16 +5,24 @@
       <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  
+      
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
       <!-- Awesome Fonts Icons-->
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-  
       <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+      <script src="https://cdn.datatables.net/2.0.5/js/dataTables.min.js"></script>
+      <script>
+        $(document).ready( function () {
+    alert("test");
+    $('#data').DataTable();
+  } );
+  </script>
   {% endblock %}
   {% block content %}
   <div class="container">
+
+    </script>
     <button class="btn bg-green text-light" href="path_to_selected_files" download="proposed_file_names"><strong><strong><span class="fas fa-download"></span> Download Selected Files</strong></button>
     <button class="col-2 btn bg-green text-light float-right" href="path_to_all_files" download="proposed_file_names"><strong><span class="fas fa-download"></span> Download All</strong></button>
     <br><br>
